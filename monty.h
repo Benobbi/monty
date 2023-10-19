@@ -42,5 +42,6 @@ void f_pall(stack_t **head, unsigned int line_count);
 void f_push(stack_t **head, unsigned int line_count);
 void f_push(stack_t **head, unsigned int number);
 void f_pall(stack_t **head, unsigned int number);
+void f_stack(stack_t **head, unsigned int line_count);
 int main(int argc, char *argv[]);
 #endif

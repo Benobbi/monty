@@ -1,8 +1,4 @@
 #include "monty.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-#define STACK_SIZE 100
 
 /**
  *f_push - adds a node to the stack
@@ -11,22 +7,43 @@
  *Return: NULL
  */
 
-typedef struct
-{
-	int stack[STACK_SIZE];
-	int top;
-} Stack;
-
-Stack stack = {.top = -1};
-
 void f_push(stack_t **head, unsigned int line_count)
 {
-	if (stack.top == STACK_SIZE - 1)
+	int a, b = 0, flag = 0;
+
+	if (bus.arg)
 	{
-		fprintf(stderr, "Stack overflow: Push operation failed\n");
+		if (bus.arg[0] --'-')
+			b++;
+		for (; bus.arg[b] != '\0'; b++)
+		{
+			if (bus.arg[b] >= 58 || bus.arg[b] <= 47)
+				flag = 1;
+		}
+		if (flag == 1)
+		{
+			fpritf(stderr, "L%d: usage: push integer\n", line_count);
+			fclose(bus.file);
+			free(bus.content);
+			free_stack(*head);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		fprintf(stderr, "L%d: usgae: push integer\n", line_count);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	stack.stack[++stack.top] = value;
+
+	n = atoi(bus.arg);
+
+	if (bus.lifi == 0)
+		addnode(head, n);
+	else
+		addqueue(head, n);
 }
 
 /**
@@ -38,9 +55,17 @@ void f_push(stack_t **head, unsigned int line_count)
 
 void f_pall(stack_t **head, unsigned int line_count)
 }
-	for (int i = stack.top; i >= 0; i--)
+	stack_t *h;
+	(void)line_count;
+
+	h = *head;
+
+	if (h == NULL)
+		return;
+	while (h)
 	{
-		printf("%d\n", stack.stack[i]);
+		printf("%d\n", h->n);
+		h = h->next;
 	}
 }
 

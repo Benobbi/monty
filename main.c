@@ -1,6 +1,6 @@
 #include "monty.h"
 
-thread_t thread = {NULL, NULL, NULL, NULL, 0};
+bus_t bus = {NULL, NULL, NULL, 0};
 
 /**
  * main - starting point of program
@@ -23,17 +23,17 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
-	thread.file = file;
+	bus.file = file;
 	if (!file)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n");
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	while (lines_read >= 1)
 	{
 		content = NULL;
 		lines_read = getline(&content, &size, file);
-		thread.content = content;
+		bus.content = content;
 		line_count++;
 		if (lines_read >= 1)
 		{
