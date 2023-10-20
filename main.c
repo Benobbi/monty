@@ -12,11 +12,11 @@ bus_t bus = {NULL, NULL, NULL, 0};
 
 int main(int argc, char *argv[])
 {
-	unsigned int line_count = 0;
+	unsigned int counter = 0;
 	char *content;
 	FILE *file;
 	size_t size = 0;
-	ssize_t lines_read = 1;
+	ssize_t read_line = 1;
 	stack_t *stack = NULL;
 
 	if (argc != 2)
@@ -31,15 +31,15 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (lines_read >= 1)
+	while (read_line >= 1)
 	{
 		content = NULL;
-		lines_read = getline(&content, &size, file);
+		read_line = getline(&content, &size, file);
 		bus.content = content;
-		line_count++;
-		if (lines_read >= 1)
+		counter++;
+		if (read_line >= 1)
 		{
-			execute(content, &stack, line_count, file);
+			execute(content, &stack, counter, file);
 		}
 		free(content);
 	}
