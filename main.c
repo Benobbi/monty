@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdio.h>
 
 bus_t bus = {NULL, NULL, NULL, 0};
 
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
 	FILE *file;
 	size_t size = 0;
 	ssize_t lines_read = 1;
+	stack_t *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -37,7 +39,7 @@ int main(int argc, char *argv[])
 		line_count++;
 		if (lines_read >= 1)
 		{
-			execute(content, &stack, counter, file);
+			execute(content, &stack, line_count, file);
 		}
 		free(content);
 	}
@@ -45,4 +47,3 @@ int main(int argc, char *argv[])
 	fclose(file);
 return (0);
 }
-
